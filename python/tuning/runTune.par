@@ -1,0 +1,22 @@
+# IONIC SETUP
+# _____________________________________________________________________________
+ num_imp_regions		=	1 
+
+# ELECTRICAL SETUP
+# _____________________________________________________________________________
+num_stim			=	1
+
+# Conductive Regions
+num_gregions			=       1
+
+
+# Numerical Settings
+# _____________________________________________________________________________
+dt		            =      10.0
+bidomain            =      0
+parab_solve	        =      0
+mass_lumping	    =      0
+cg_tol_parab	    =      1e-09
+bidm_eqv_mono	    =      1
+spacedt		        =      0.5
+timedt		        =      20
