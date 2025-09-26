@@ -1,0 +1,26 @@
+#!/bin/bash
+parentFolder="/media/anthonyowusu-mensah/TonySSD/tryNew/noSTARTstate/lumpMatrix/testSimul2/sinusCV" 
+ECGFolder="/media/anthonyowusu-mensah/TonySSD/tryNew/noSTARTstate/lumpMatrix/testSimul2/ECG_files"
+#igbFileName="${1:-fileName}"
+
+#outPutFile="${2:-outPutFile}"
+
+files=("Ctrl-His-1000-GM-0.3-S1S2-0-Stim-50-Rpmj-45e3-mGNa-0.7-pGNa-0.95-vtx-noEctopy-savF-1-Mlump-1-parabSol-0-fit-1.25" \
+       "Ctrl-His-1000-GM-1.0-S1S2-0-Stim-50-Rpmj-45e3-mGNa-1.0-pGNa-1.0-vtx-noEctopy-savF-1-Mlump-1-parabSol-0-fit-1.0" \
+       "LQT2-His-1000-GM-0.3-S1S2-0-Stim-50-Rpmj-45e3-mGNa-0.7-pGNa-0.95-vtx-noEctopy-savF-1-Mlump-1-parabSol-0-fit-1.25" \
+       "LQT2-His-1000-GM-1.0-S1S2-0-Stim-50-Rpmj-45e3-mGNa-1.0-pGNa-1.0-vtx-noEctopy-savF-1-Mlump-1-parabSol-0-fit-1.0")
+
+
+for file in "${files[@]}"; do
+
+    outPutFile=${ECGFolder}/${file}_ECG
+    
+    igbFileName=${parentFolder}/${file}/${file}_ECG.igb
+    
+    if [[ ! -e "${outPutFile}" ]]; then
+        igbextract --list=* --output-file="${outPutFile}" "${igbFileName}"
+
+
+    fi
+
+done

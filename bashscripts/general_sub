@@ -1,0 +1,19 @@
+#!/bin/bash
+# List all files with with .sh extensions;
+files=($(ls *.sh | sort -u))
+#files="$1"
+if [[ "${#files[@]}" -ne 0 ]]; then
+	for file in "${files[@]}";do
+		#noSh=$(echo "${file}" | cut -d '.' -f 1); #remove .sh(could be a folder name)
+		noSh="${file::-3}";
+		if [[ ! -d "${noSh}" ]]; then
+			sbatch "${file}"
+		else
+			echo "${noSh} folder exist"
+		fi
+	done
+else
+	echo "No .sh files are present"
+fi
+
+exit;

@@ -1,0 +1,12 @@
+#!/bin/bash
+# List all files with with .sh extensions;
+#files=($(ls *.sh | sort -u))
+file="$1"
+noSh="${file::-3}"; # Remove .sh extension
+if [[ ! -d "${noSh}" ]]; then
+	sbatch "${file}"
+else
+	echo "${noSh} folder or ${file} exists"
+fi
+
+exit;

@@ -1,0 +1,35 @@
+#!/bin/bash
+module load container_env carpentry
+
+
+meshPath="${1:-/scratch/aowus003/Cardiac_Simulations/TestSim/CinC/TissueNew_Cinc/TbunnySim/TBunnyC_run/HeartRythm/SinusRythm/LQT2/LQT2parFIle/carputilsLQT2/TestPrepace/newRunsLQT2/cv_purkinje/sbatchRun/runS1S2/newSimulations/}"
+fName="${2:-LQT2}"
+His=1000
+gm=0.3
+Rpmj="45e3"
+sVal="50"
+mGNa=0.7
+pGNa=0.95
+vtx_f="LeftMultiple_two"
+savF=1
+threshold="-40"
+dt="8"
+
+for S2 in $(seq 200 5 330); do
+
+	file="${fName}-His-${His}-GM-${gm}-S1S2-${S2}-Stim-${sVal}-Rpmj-${Rpmj}-mGNa-${mGNa}-pGNa-${pGNa}-vtx-${vtx_f}-savF-${savF}";
+	fullPath="${meshPath}/${file}"
+	cd  "${fullPath}" #  Get into the folder
+
+	if [[ ! -f "${fullPath}/myopurk.lon" ]]; then
+		cp ${fullPath}/TBunnyC_i.lon ${fullPath}/myopurk.lon
+
+	fi
+
+	# Running Gfilament
+	echo  "${file} ============================================="
+	crun GlFilament ${fullPath}/myopurk ${fullPath}/${file}.igb ${threshold} ${dt}
+	echo " "
+
+
+done
